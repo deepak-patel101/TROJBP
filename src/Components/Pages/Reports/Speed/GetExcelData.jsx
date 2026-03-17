@@ -134,7 +134,7 @@ const GetExcelData = ({ data, setData }) => {
         <div
           className={`m-1 p-2 border border-1 card  text-white ${data?.HomeSignal ? "bg-success " : "bg-danger"}`}
         >
-          Home Signal
+          Signals
         </div>
         <div
           className={`m-1 p-2 border border-1 card text-white ${data?.PrimaryGPSData ? "bg-success" : "bg-danger"}`}
