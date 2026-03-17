@@ -59,7 +59,7 @@ export function getDistanceByOHE(data) {
 }
 
 ////////////////////////////////////////////////////////////
-export function findNearestWithin(array1, array2, maxDistance = 300) {
+export function findNearestWithin(array1, array2, maxDistance = 50) {
   const result = [];
 
   array1.forEach((point1) => {
