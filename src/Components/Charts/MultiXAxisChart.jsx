@@ -63,8 +63,8 @@ const MultiXAxisChart = ({ xAxes = [], seriesData = [] }) => {
 
         // Use the axisValue from the primary snap (usually first axis or the one with snap)
         const hoveredValue =
-          params[0].axisValue != null ? Number(params[0].axisValue) : null;
-        const newNearest = params[1].axisValue;
+          params[0]?.axisValue != null ? Number(params[0].axisValue) : null;
+        const newNearest = params[1]?.axisValue || "";
         let header = "";
 
         xAxes.forEach((axis, i) => {
@@ -178,7 +178,11 @@ const MultiXAxisChart = ({ xAxes = [], seriesData = [] }) => {
   };
 
   return (
-    <ReactECharts option={option} style={{ height: 450, width: "95vw" }} />
+    <ReactECharts
+      option={option}
+      notMerge={true}
+      style={{ height: 450, width: "95vw" }}
+    />
   );
 };
 

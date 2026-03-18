@@ -6,6 +6,7 @@ import Home from "./Components/Pages/Home/Home";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import NavBar from "./Components/Pages/NavBar";
 import SpeedHome from "./Components/Pages/Reports/Speed/SpeedHome";
+import KmlFileMaker from "./Components/Pages/Reports/KMLFile.jsx/KmlFileMaker";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/speed" element={<SpeedHome />} />
+        <Route path="/kmlFile" element={<KmlFileMaker />} />
       </Routes>
     </BrowserRouter>
   );

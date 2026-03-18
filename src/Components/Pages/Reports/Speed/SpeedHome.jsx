@@ -31,12 +31,11 @@ const SpeedHome = () => {
     }
 
     // Secondary axis – home signals (index 1)
-    if (distance && data?.HomeSignal?.length) {
-      console.log(data);
+    if (distance && data.Mast && data?.HomeSignal?.length) {
       const matchDataOfHomeSignal = findNearestWithin(
         data.HomeSignal,
         distance,
-        300,
+        38,
       );
 
       const matchedHomeSignals = matchDataOfHomeSignal.map(
@@ -104,7 +103,7 @@ const SpeedHome = () => {
       const matchDataOfHomeSignal = findNearestWithin(
         data.HomeSignal,
         distance,
-        300,
+        38,
       );
 
       // Use a large but reasonable dummy value (much higher than max speed)
@@ -132,24 +131,63 @@ const SpeedHome = () => {
 
     return series;
   }, [data?.PrimaryGPSData, data?.HomeSignal, distance]);
+  const a =
+    data.HomeSignal &&
+    distance &&
+    findNearestWithin(data.HomeSignal, distance, 380);
 
+  const findDuplicatesByTwoKeys = (arr, key1, key2) => {
+    const seen = new Set();
+    const duplicates = [];
+
+    for (let item of arr) {
+      const combinedKey = `${item[key1]}-${item[key2]}`;
+
+      if (seen.has(combinedKey)) {
+        duplicates.push(item);
+      } else {
+        seen.add(combinedKey);
+      }
+    }
+
+    return duplicates;
+  };
+  const b =
+    data.PrimaryGPSData &&
+    a &&
+    findNearestWithin(data.HomeSignal, data.PrimaryGPSData, 20);
+  console.log(b);
   return (
     <div>
       <GetExcelData data={data} setData={setData} />
       <div className="d-flex justify-content-center">
         {chartSeriesData.length > 0 && chartXAxes.length > 0 && (
           <div className="border">
-            <MultiXAxisChart
-              xAxes={chartXAxes}
-              seriesData={chartSeriesData}
-              // If MultiXAxisChart accepts yAxes prop, you can force good scaling:
-              // yAxes={[{
-              //   type: 'value',
-              //   min: 0,
-              //   max: 'dataMax',     // or fixed e.g. 200 if you know max speed
-              //   name: 'Speed (km/h)',
-              // }]}
-            />
+            {data.PrimaryGPSData && data?.HomeSignal && data.Mast ? (
+              <MultiXAxisChart
+                xAxes={chartXAxes}
+                seriesData={chartSeriesData}
+                // If MultiXAxisChart accepts yAxes prop, you can force good scaling:
+                // yAxes={[{
+                //   type: 'value',
+                //   min: 0,
+                //   max: 'dataMax',     // or fixed e.g. 200 if you know max speed
+                //   name: 'Speed (km/h)',
+                // }]}
+              />
+            ) : (
+              <MultiXAxisChart
+                xAxes={chartXAxes}
+                seriesData={chartSeriesData}
+                // If MultiXAxisChart accepts yAxes prop, you can force good scaling:
+                // yAxes={[{
+                //   type: 'value',
+                //   min: 0,
+                //   max: 'dataMax',     // or fixed e.g. 200 if you know max speed
+                //   name: 'Speed (km/h)',
+                // }]}
+              />
+            )}
           </div>
         )}
       </div>

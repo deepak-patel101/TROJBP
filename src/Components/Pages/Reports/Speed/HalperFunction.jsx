@@ -59,6 +59,8 @@ export function getDistanceByOHE(data) {
 }
 
 ////////////////////////////////////////////////////////////
+// array1 = signals
+// array2 = mast
 export function findNearestWithin(array1, array2, maxDistance = 50) {
   const result = [];
 

@@ -58,6 +58,16 @@ const NavBar = () => {
                 Speed
               </Link>
             </li>
+            <li className="nav-item mx-2">
+              <Link
+                className={`nav-link ${
+                  location.pathname === "/speed" ? "active fw-bold" : ""
+                }`}
+                to="/kmlFile"
+              >
+                KML File
+              </Link>
+            </li>
 
             {/* CTA Button */}
             <li className="nav-item ms-3">
